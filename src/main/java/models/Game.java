@@ -16,6 +16,7 @@ public class Game {
 
     public Game(){
         // initialize a new game such that each column can store cards
+
     }
 
     public void buildDeck() {
@@ -29,6 +30,21 @@ public class Game {
 
     public void shuffle() {
         // shuffles the deck so that it is random
+		Random randomGen = new Random();                        //Initialize random number generator object
+		for(int i=0; i<200; i++){                               //Perform 200 times just to ensure the deck is shuffled
+			int randomInt = randomGen.nextInt(52);      //Get the indexes of two random cards
+			int randomInt2 = randomGen.nextInt(52);
+			Card tempCard = deck.get(randomInt);                //Store the value of both cards
+			Card tempCard2 = deck.get(randomInt2);
+			deck.remove(randomInt);                             //Remove the card at the first index and copy the second card over
+			deck.add(randomInt, tempCard2);
+			deck.remove(randomInt2);                            //Remove the card at the second index and copy the first card over
+			deck.add(randomInt2, tempCard);
+		}
+		
+		/*for(int i=0; i<52; i++){              //Print the entire deck for testing purposes
+			System.out.println(deck.get(i));
+		}*/
     }
 
     public void dealFour() {
