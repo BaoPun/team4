@@ -62,6 +62,8 @@ public class Game {
                 Card top = deck.get(deck.size() - 1 - i);
                 deck.remove(deck.size() - 1 - i);
                 System.out.println("Column " + (i + 1) + " has card " + top);
+                //Just making a branch for myself, forgot to make one....
+                System.out.println("Branch");
                 gAddCol.invoke(game, i, top);
 
             }
