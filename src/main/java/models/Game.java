@@ -47,7 +47,7 @@ public class Game {
 			deck.remove(randomInt2);                            //Remove the card at the second index and copy the first card over
 			deck.add(randomInt2, tempCard);
 		}
-		
+
 		/*for(int i=0; i<52; i++){              //Print the entire deck for testing purposes
 			System.out.println(deck.get(i));
 		}*/
@@ -69,6 +69,19 @@ public class Game {
 
     public void remove(int columnNumber) {
         // remove the top card from the indicated column
+        if (columnHasCards(columnNumber) == false)
+            return;
+        Card toRemove = getTopCard(columnNumber);
+        //System.out.println("toRemove is a " + toRemove.getValue() + " of " + toRemove.getSuit());
+        for (int i = 0; i < 4; i++) {
+            if (i != columnNumber && columnHasCards(i)) {
+                Card temp = getTopCard(i);
+                if ((toRemove.getSuit() == temp.getSuit()) && (toRemove.getValue() < temp.getValue())) {
+                    removeCardFromCol(columnNumber);
+                    return;
+                }
+            }
+        }
     }
 
     private boolean columnHasCards(int columnNumber) {
