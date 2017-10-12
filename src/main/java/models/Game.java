@@ -97,7 +97,8 @@ public class Game {
 
 
     public void move(int columnFrom, int columnTo) {
-        // remove the top card from the columnFrom column, add it to the columnTo column
+        // remove the top card from the columnFrom column, add it to the columnTo
+        // Kevin takes care of it.
     }
 
     private void addCardToCol(int columnTo, Card cardToMove) {
@@ -105,6 +106,6 @@ public class Game {
     }
 
     private void removeCardFromCol(int colFrom) {
-        this.cols.get(colFrom).remove(this.cols.get(colFrom).size());
+        this.cols.get(colFrom).remove(this.cols.get(colFrom).size()-1);
     }
 }
