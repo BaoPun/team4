@@ -55,13 +55,15 @@ public class Game {
 
     public void dealFour() {
         // remove the top card from the deck and add it to a column; repeat for each of the four columns
-	    for(int i = 0; i < 4; i++) {
-	        Card top = deck.get(deck.size() - 1);        //retrieve top card of deck
-            deck.remove(deck.size() - 1);                //remove it right after LuL
-            addCardToCol(i, top);
-            Card t = getTopCard(i);
-            boolean empty = columnHasCards(i);
-            System.out.println("\n");
+        if(deck.size() >= 0) {
+            for (int i = 0; i < 4; i++) {
+                Card top = deck.get(deck.size() - 1);        //retrieve top card of deck
+                deck.remove(deck.size() - 1);                //remove it right after LuL
+                addCardToCol(i, top);
+                //Card t = getTopCard(i); 		                //retrieve top card from specified column
+                //boolean empty = columnHasCards(i); 	        //check if specified col has any cards
+                //System.out.println("\n");
+            }
         }
     }
 
@@ -84,12 +86,12 @@ public class Game {
 
     private boolean columnHasCards(int columnNumber) {
         // check indicated column for number of cards; if no cards return false, otherwise return true
-        System.out.println("Column " + (columnNumber + 1) + " has this many cards: " + this.cols.get(columnNumber).size());
+        //System.out.println("Column " + (columnNumber + 1) + " has this many cards: " + cols.get(columnNumber).size());
         return (this.cols.get(columnNumber).size() != 0);
     }
 
     private Card getTopCard(int columnNumber) {
-        System.out.println("Top card in col " + (columnNumber + 1) + ": " + this.cols.get(columnNumber).get(this.cols.get(columnNumber).size()-1));
+        //System.out.println("Top card in col " + (columnNumber + 1) + ": " + this.cols.get(columnNumber).get(this.cols.get(columnNumber).size()-1));
         return this.cols.get(columnNumber).get(this.cols.get(columnNumber).size()-1);
     }
 
@@ -103,6 +105,6 @@ public class Game {
     }
 
     private void removeCardFromCol(int colFrom) {
-        this.cols.get(colFrom).remove(this.cols.get(colFrom).size()-1);
+        this.cols.get(colFrom).remove(this.cols.get(colFrom).size());
     }
 }
