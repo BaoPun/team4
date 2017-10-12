@@ -51,8 +51,8 @@ public class Game {
 
     public void dealFour() {
         // remove the top card from the deck and add it to a column; repeat for each of the four columns
-		for(int i = 0; i < 4; i++){
-		    //because addCardToCol is private, have to declare and invoke addCardToCol method to access the function
+	for(int i = 0; i < 4; i++){
+	    //because addCardToCol is private, have to declare and invoke addCardToCol method to access the function
             //try and catch is required for Java to not have a compiling error...
             Method gAddCol;
             Game game = new Game();
@@ -83,7 +83,7 @@ public class Game {
 
     private boolean columnHasCards(int columnNumber) {
         // check indicated column for number of cards; if no cards return false, otherwise return true
-        System.out.println("Column " + columnNumber + 1 + "has this many cards: " + this.cols.get(columnNumber).size());
+        System.out.println("Column " + (columnNumber + 1) + " has this many cards: " + this.cols.get(columnNumber).size());
         return (this.cols.get(columnNumber).size() != 0);
     }
 
