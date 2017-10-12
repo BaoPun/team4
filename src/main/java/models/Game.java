@@ -18,7 +18,11 @@ public class Game {
 
     public Game(){
         // initialize a new game such that each column can store cards
-
+        // 2d array is initialized here, cannot do algorithms outside any method
+        for(int i = 0; i < 4; i++)
+        {
+            cols.add(new ArrayList<Card>());
+        }
     }
 
     public void buildDeck() {
@@ -52,18 +56,24 @@ public class Game {
     public void dealFour() {
         // remove the top card from the deck and add it to a column; repeat for each of the four columns
 	for(int i = 0; i < 4; i++){
-	    //because addCardToCol is private, have to declare and invoke addCardToCol method to access the function
+	        //because addCardToCol is private, have to declare and invoke addCardToCol method to access the function
             //try and catch is required for Java to not have a compiling error...
-            Method gAddCol;
+            //terminal output will have comments, omit if you wish
+            Method gAddCol, gTopCol, gEmptyCol;
             Game game = new Game();
             try{
                 gAddCol = Game.class.getDeclaredMethod("addCardToCol", int.class, Card.class);
+                gTopCol = Game.class.getDeclaredMethod("getTopCard", int.class);
+                gEmptyCol = Game.class.getDeclaredMethod("columnHasCards", int.class);
                 gAddCol.setAccessible(true);
+                gTopCol.setAccessible(true);
+                gEmptyCol.setAccessible(true);
                 Card top = deck.get(deck.size() - 1 - i);
                 deck.remove(deck.size() - 1 - i);
-                System.out.println("Column " + (i + 1) + " has card " + top);
                 gAddCol.invoke(game, i, top);
-
+                Card t = (Card) gTopCol.invoke(game, i); //terminal
+                boolean empty = (boolean) gEmptyCol.invoke(game, i); //terminal
+                System.out.println("\n");
             }
             catch (NoSuchMethodException e) {
                 //e.printStackTrace();
@@ -88,6 +98,7 @@ public class Game {
     }
 
     private Card getTopCard(int columnNumber) {
+        System.out.println("Top card in col " + (columnNumber + 1) + ": " + this.cols.get(columnNumber).get(this.cols.get(columnNumber).size()-1));
         return this.cols.get(columnNumber).get(this.cols.get(columnNumber).size()-1);
     }
 
