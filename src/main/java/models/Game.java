@@ -97,7 +97,8 @@ public class Game {
 
 
     public void move(int columnFrom, int columnTo) {
-        // remove the top card from the columnFrom column, add it to the columnTo column
+        // remove the top card from the columnFrom column, add it to the columnTo
+        // Kevin takes care of it.
     }
 
     private void addCardToCol(int columnTo, Card cardToMove) {
