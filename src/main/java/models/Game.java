@@ -1,5 +1,7 @@
 package models;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
@@ -49,12 +51,30 @@ public class Game {
 
     public void dealFour() {
         // remove the top card from the deck and add it to a column; repeat for each of the four columns
-		for(int i = 0; i < 4; i++)
-		{
-			Card temp = deck.get(deck.size() - 1);
-			addCardToCol(i, temp);
-			deck.remove(deck.size() - 1);
-		}
+		for(int i = 0; i < 4; i++){
+		    //because addCardToCol is private, have to declare and invoke addCardToCol method to access the function
+            //try and catch is required for Java to not have a compiling error...
+            Method gAddCol;
+            Game game = new Game();
+            try{
+                gAddCol = Game.class.getDeclaredMethod("addCardToCol", int.class, Card.class);
+                gAddCol.setAccessible(true);
+                Card top = deck.get(deck.size() - 1 - i);
+                deck.remove(deck.size() - 1 - i);
+                System.out.println("Column " + (i + 1) + " has card " + top);
+                gAddCol.invoke(game, i, top);
+
+            }
+            catch (NoSuchMethodException e) {
+                //e.printStackTrace();
+            }
+            catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+            catch (InvocationTargetException e) {
+                //e.printStackTrace();
+            }
+        }
     }
 
     public void remove(int columnNumber) {
@@ -63,7 +83,8 @@ public class Game {
 
     private boolean columnHasCards(int columnNumber) {
         // check indicated column for number of cards; if no cards return false, otherwise return true
-        return false;
+        System.out.println("Column " + columnNumber + 1 + "has this many cards: " + this.cols.get(columnNumber).size());
+        return (this.cols.get(columnNumber).size() != 0);
     }
 
     private Card getTopCard(int columnNumber) {
