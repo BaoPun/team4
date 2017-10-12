@@ -70,7 +70,7 @@ public class Game {
                 gTopCol.setAccessible(true);
                 gEmptyCol.setAccessible(true);
                 Card top = deck.get(deck.size() - 1);   		//retrieve top card of deck
-                deck.remove(deck.size() - 1 - i);           		//remove it right after LuL
+                deck.remove(deck.size() - 1);           		//remove it right after LuL
                 gAddCol.invoke(game, i, top);               		//call addCardToCol method
                 Card t = (Card) gTopCol.invoke(game, i); 		//terminal, call getTopCard method
                 boolean empty = (boolean) gEmptyCol.invoke(game, i); 	//terminal, call columnHasCards method
