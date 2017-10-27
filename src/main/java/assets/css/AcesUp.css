@@ -4,6 +4,7 @@ width:500px;
 
 
 h1
+{
     text-align: center;
 }
 
@@ -35,4 +36,17 @@ font-weight: bold;
 .cardLocation{
 width: 100px;
 background-color:#F0F0F0;
+}
+
+#dealButton{
+font-size: 30px;
+width: 100px;
+height: 80px;
+float: right;
+position: relative;
+border-radius: 15%;
+top: -250px;
+right: 100px;
+background-color: dodgerblue;
+
 }
