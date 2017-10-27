@@ -6,9 +6,17 @@ width:500px;
 h1
 {
     text-align: center;
+    background-color: #5b9e47;
+    width: 200px;
+    display: inline-block;
+    border: 2px solid black;
+    border-radius: 15%;
+    margin: 30px;
+    font-size: 36px;
 }
 
 body{
+    margin-top: 0px;
     text-align: center;
     font-family: 'PT Sans Caption', sans-serif;
     background-image: url(http://www.outrageousfortunes.co.uk/wp-content/uploads/2015/05/poker-table-felt.jpg)
