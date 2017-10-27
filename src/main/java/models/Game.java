@@ -60,9 +60,6 @@ public class Game {
                 Card top = deck.get(deck.size() - 1);        //retrieve top card of deck
                 deck.remove(deck.size() - 1);                //remove it right after LuL
                 addCardToCol(i, top);
-                //Card t = getTopCard(i); 		                //retrieve top card from specified column
-                //boolean empty = columnHasCards(i); 	        //check if specified col has any cards
-                //System.out.println("\n");
             }
         }
     }
@@ -98,10 +95,7 @@ public class Game {
 
     public void move(int columnFrom, int columnTo) {
         // remove the top card from the columnFrom column, add it to the columnTo
-        if (columnHasCards(columnFrom) == false) {
-            return;
-        }
-        if (columnHasCards(columnTo) == true) {
+        if (columnHasCards(columnFrom) == false && columnHasCards(columnTo) == true) {
             return;
         }
         Card temp =  getTopCard(columnFrom);

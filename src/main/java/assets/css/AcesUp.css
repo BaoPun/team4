@@ -2,6 +2,26 @@ tr{
 width:500px;
 }
 
+
+h1
+    text-align: center;
+}
+
+body{
+    text-align: center;
+}
+
+table
+{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.columnOfCards
+{
+    border: 1px solid black;
+}
+
 td{
 width:100px;
 height:20px;
