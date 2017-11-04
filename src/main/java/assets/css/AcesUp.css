@@ -1,12 +1,14 @@
 tr{
-width:500px;
+    /*width: 500px;*/
+    height: 25px;
 }
 
 
 h1
 {
     text-align: center;
-    background-color: #5b9e47;
+    background-color: mediumseagreen;
+    /*background-color: #5b9e47; */
     width: 200px;
     display: inline-block;
     border: 2px solid black;
@@ -26,42 +28,48 @@ table
 {
     margin-left: auto;
     margin-right: auto;
-    background-color: #5b9e47
+    /*background-color: #5b9e47*/
+    background-color: mediumseagreen;
 }
 
 .columnOfCards
 {
-    border: 1px solid black;
+    /*border: 1px solid black;*/
 }
 
 td{
-width:100px;
-height:20px;
-text-align:center;
+    width: 150px;
+    /*height: 20px;*/
+    text-align: center;
 }
 
 .title{
-font-weight: bold;
-font-size: 24px;
+    font-weight: bold;
+    font-size: 24px;
 }
 
 .cardLocation{
-width: 100px;
-background-color:#F0F0F0;
+    width: 100px;
+    background-color:#F0F0F0;
+}
+
+.cardContainer {
+    margin-bottom: 15px;
+    border: 1px solid black;
 }
 
 #dealButton{
-font-size: 30px;
-width: 100px;
-height: 80px;
-float: right;
-position: relative;
-border-radius: 15%;
-top: -90px;
-right: 2px;
-background-color: dodgerblue;
-
+    font-size: 30px;
+    width: 100px;
+    height: 80px;
+    float: right;
+    position: relative;
+    border-radius: 15%;
+    top: -90px;
+    right: 2px;
+    background-color: dodgerblue;
 }
+
 #dealButton:hover{
     cursor: pointer;
     transform: scale(1.1);
