@@ -101,3 +101,16 @@ td{
     border-color: firebrick;
     background-color: red;
 }
+
+a:link{
+    color: blue;
+    display: inline-block;
+    position: relative;
+    font-size: 25px;
+    top: 30px;
+    left: 50px;
+}
+
+a:visited{
+    color: blue;
+}

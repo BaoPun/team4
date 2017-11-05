@@ -55,7 +55,7 @@ public class Game {
 
     public void dealFour() {
         // remove the top card from the deck and add it to a column; repeat for each of the four columns
-        if(deck.size() >= 0) {
+        if(deck.size() > 0) {
             for (int i = 0; i < 4; i++) {
                 Card top = deck.get(deck.size() - 1);        //retrieve top card of deck
                 deck.remove(deck.size() - 1);                //remove it right after LuL
