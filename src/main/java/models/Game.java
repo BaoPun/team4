@@ -94,13 +94,14 @@ public class Game {
 
 
     public void move(int columnFrom, int columnTo) {
-        // remove the top card from the columnFrom column, add it to the columnTo
-        if (columnHasCards(columnFrom) == false && columnHasCards(columnTo) == true) {
-            return;
-        }
-        Card temp =  getTopCard(columnFrom);
-        removeCardFromCol(columnFrom);
-        addCardToCol(columnTo, temp);
+        
+       if(columnHasCards(columnFrom)) {
+           Card temp = getTopCard(columnFrom);
+           if (!columnHasCards(columnTo) && temp.getValue() == 14) {
+               removeCardFromCol(columnFrom);
+               addCardToCol(columnTo, temp);
+           }
+       }
     }
 
     private void addCardToCol(int columnTo, Card cardToMove) {
