@@ -97,8 +97,7 @@
 <BR>Move from column <input type="text" id="from_col"  /> to <input type="text" id="to_col"  /> <button id="moveButton">Move</button>
 <br>
 <div id="deckImage">
-    <button id="dealButton">Draw Cards</button>
-    <div id="innerDeckImage"></div>
+    <div id="innerDeckImage"><p class = "deckTextImage">DRAW CARDS</p></div>
 </div>
 
 <a href="https://en.wikipedia.org/wiki/Aces_Up">RULES FOUND HERE</a>
@@ -140,7 +139,7 @@ game = data;
 });
 
 
-$("#dealButton").click(function(){
+$("#deckImage").click(function(){
 $.ajax({
   type: "POST",
   url: "/dealGame",
