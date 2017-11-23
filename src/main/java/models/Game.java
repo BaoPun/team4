@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Game {
 
-    public Deck deck = new Deck();
+    public SpanDeck deck = new SpanDeck();
 
     public java.util.List<java.util.List<Card>> cols = new ArrayList<>(4);
 
@@ -22,7 +22,7 @@ public class Game {
     public void dealFour() {
         // remove the top card from the deck and add it to a column; repeat for each of the four columns
         if(deck.getSize() > 0) {
-            for (int i = 0; i < 4; i++) {
+            for (int i = 0; i < 4 && deck.getSize() > 0; i++) {
                 Card top = deck.popCard(deck.getSize() - 1);        //retrieve top card of deck
                 deck.removeCard(deck.getSize() - 1);                //remove it right after LuL
                 addCardToCol(i, top);
@@ -39,9 +39,17 @@ public class Game {
         for (int i = 0; i < 4; i++) {
             if (i != columnNumber && columnHasCards(i)) {
                 Card temp = getTopCard(i);
-                if ((toRemove.getSuit() == temp.getSuit()) && (toRemove.getValue() < temp.getValue())) {
+                if ((toRemove.getSuit() == temp.getSuit()) && (toRemove.getValue() < temp.getValue() || temp.getValue() == 1)) {
                     removeCardFromCol(columnNumber);
                     return;
+                }
+            }
+        }for(int i = 0; i < 4; i++) {
+            if(i != columnNumber && columnHasCards(i)){
+                Card temp = getTopCard(i);
+                if(temp.getValue() == 0){
+                    removeCardFromCol(columnNumber);
+                    removeCardFromCol(i);
                 }
             }
         }
@@ -61,7 +69,7 @@ public class Game {
         
        if(columnHasCards(columnFrom)) {
            Card temp = getTopCard(columnFrom);
-           if (!columnHasCards(columnTo) && temp.getValue() == 14) {
+           if (!columnHasCards(columnTo) && ((temp.getValue() == 14) || (temp.getValue() == 0) || (temp.getValue() == 1))) {
                removeCardFromCol(columnFrom);
                addCardToCol(columnTo, temp);
            }
