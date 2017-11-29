@@ -31,7 +31,8 @@ public class ApplicationController {
     public Result index() {
         return Results.html().template("views/AcesUp/AcesUp.flt.html");
     }
-    
+
+    /*All of the functions that were preset were split into 2 components: regular and spanish*/
     public Result gameGetReg(){
         GameReg g = new GameReg();
         g.dealFour();
@@ -46,19 +47,36 @@ public class ApplicationController {
         return Results.json().render(g);
     }
 
-    public Result dealPost(Context context, GameReg g) {
+    public Result dealPostReg(Context context, GameReg g) {
         if(context.getRequestPath().contains("deal")){
             g.dealFour();
         }
         return Results.json().render(g);
     }
 
-    public Result removeCard(Context context, @PathParam("column") int colNumber, GameReg g){
+    public Result dealPostSpan(Context context, GameSpan g) {
+        if(context.getRequestPath().contains("deal")){
+            g.dealFour();
+        }
+        return Results.json().render(g);
+    }
+
+    public Result removeCardReg(Context context, @PathParam("column") int colNumber, GameReg g){
         g.remove(colNumber);
         return Results.json().render(g);
     }
 
-    public Result moveCard(Context context, @PathParam("columnFrom") int colFrom, @PathParam("columnTo") int colTo, GameReg g){
+    public Result removeCardSpan(Context context, @PathParam("column") int colNumber, GameSpan g){
+        g.remove(colNumber);
+        return Results.json().render(g);
+    }
+
+    public Result moveCardReg(Context context, @PathParam("columnFrom") int colFrom, @PathParam("columnTo") int colTo, GameReg g){
+        g.move(colFrom,colTo);
+        return Results.json().render(g);
+    }
+
+    public Result moveCardSpan(Context context, @PathParam("columnFrom") int colFrom, @PathParam("columnTo") int colTo, GameSpan g){
         g.move(colFrom,colTo);
         return Results.json().render(g);
     }

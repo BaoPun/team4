@@ -101,7 +101,7 @@
 </div>
 
 <a href="https://en.wikipedia.org/wiki/Aces_Up">RULES FOUND HERE</a>
-<button id="reg_game"> SWAP DECKS </button>
+<button id="switchGame"> CLICK TO SWITCH DECK </button>
 
 <script>
 
@@ -132,7 +132,12 @@ function display(game) {
 /*If game was just loaded, ask if they want to play with the regular deck. Dependent on response now*/
 if(switchValue == -1)
 {
-    var deckRespond = prompt("To play regular deck type: YES. Anything else, spanish deck will be played!").toUpperCase();
+    var deckRespond = prompt("Do you want to play with the regular deck? (type 'yes' to play with this)");
+    while(deckRespond === null || deckRespond === "")
+    {
+        deckRespond = prompt("DO NOT LEAVE THIS BLANK, DO YOU WANT TO PLAY WITH THE REGULAR DECK? ");
+    }
+    deckRespond = deckRespond.toUpperCase();
     if(deckRespond == "YES")
     {
         switchValue = 1;
@@ -154,31 +159,62 @@ if(switchValue == -1)
 }
 
 $("#deckImage").click(function(){
-    $.ajax({
-      type: "POST",
-      url: "/dealGame",
-      data: JSON.stringify(game),
-      success: function(data, status){console.log("Data: " + data + "\nStatus: " + status);
-            game = data;
-            display(data);},
-      contentType:"application/json; charset=utf-8",
-      dataType:"json",
-    });
+    if(switchValue == 1)
+    {
+        $.ajax({
+          type: "POST",
+          url: "/dealGameReg",
+          data: JSON.stringify(game),
+          success: function(data, status){console.log("Data: " + data + "\nStatus: " + status);
+                game = data;
+                display(data);},
+          contentType:"application/json; charset=utf-8",
+          dataType:"json",
+        });
+    }
+    else
+    {
+         $.ajax({
+          type: "POST",
+          url: "/dealGameSpan",
+          data: JSON.stringify(game),
+          success: function(data, status){console.log("Data: " + data + "\nStatus: " + status);
+                game = data;
+                display(data);},
+          contentType:"application/json; charset=utf-8",
+          dataType:"json",
+        });
+    }
 });
 
 
 function removeCard(colNumber){
-    $.ajax({
-        type: "POST",
-        url: "/removeCard/"+colNumber,
-        data: JSON.stringify(game),
-        success: function(data, status){console.log("Data: " + data + "\nStatus: " + status);
-        game = data;
-        display(data);},
-        contentType:"application/json; charset=utf-8",
-        dataType:"json",
-    });
-
+    if(switchValue == 1)
+    {
+        $.ajax({
+            type: "POST",
+            url: "/removeCardReg/"+colNumber,
+            data: JSON.stringify(game),
+            success: function(data, status){console.log("Data: " + data + "\nStatus: " + status);
+            game = data;
+            display(data);},
+            contentType:"application/json; charset=utf-8",
+            dataType:"json",
+        });
+    }
+    else
+    {
+         $.ajax({
+            type: "POST",
+            url: "/removeCardSpan/"+colNumber,
+            data: JSON.stringify(game),
+            success: function(data, status){console.log("Data: " + data + "\nStatus: " + status);
+            game = data;
+            display(data);},
+            contentType:"application/json; charset=utf-8",
+            dataType:"json",
+        });
+    }
 }
 
 
@@ -199,20 +235,36 @@ $("#Remove4").click(function(){
 $("#moveButton").click(function(){
     var colFrom = $("#from_col").val() - 1;
     var colTo = $("#to_col").val() - 1;
-    $.ajax({
-        type: "POST",
-        url: "/moveCard/"+colFrom+"/"+colTo,
-        data: JSON.stringify(game),
-        success: function(data, status){console.log("Data: " + data + "\nStatus: " + status);
-            game = data;
-            display(data);},
-        contentType:"application/json; charset=utf-8",
-        dataType:"json",
-    });
+    if(switchValue == 1)
+    {
+        $.ajax({
+            type: "POST",
+            url: "/moveCardReg/"+colFrom+"/"+colTo,
+            data: JSON.stringify(game),
+            success: function(data, status){console.log("Data: " + data + "\nStatus: " + status);
+                game = data;
+                display(data);},
+            contentType:"application/json; charset=utf-8",
+            dataType:"json",
+        });
+    }
+    else
+    {
+         $.ajax({
+            type: "POST",
+            url: "/moveCardSpan/"+colFrom+"/"+colTo,
+            data: JSON.stringify(game),
+            success: function(data, status){console.log("Data: " + data + "\nStatus: " + status);
+                game = data;
+                display(data);},
+            contentType:"application/json; charset=utf-8",
+            dataType:"json",
+        });
+    }
 });
 
 /*After clicking on this, clear the column data, make a new deck, and play with it now*/
-$("#reg_game").click(function(){
+$("#switchGame").click(function(){
   if(switchValue == 1)
   {
         switchValue = 0;
