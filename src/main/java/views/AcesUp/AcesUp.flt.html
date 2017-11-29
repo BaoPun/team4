@@ -10,10 +10,10 @@
 
 <table>
     <tr class="title">
-        <td>Column 0</td>
-        <td >Column 1</td>
-        <td >Column 2</td>
-        <td >Column 3</td>
+        <td>Column 1</td>
+        <td>Column 2</td>
+        <td>Column 3</td>
+        <td>Column 4</td>
     </tr>
 
     <tr><td class="columnOfCards" id="c0">
@@ -92,7 +92,7 @@
 </table>
 
 
-<BR>Remove from: <button id="Remove1">Column 0</button><button id="Remove2">Column 1</button><button id="Remove3">Column 2</button><button id="Remove4">Column 3</button>
+<BR>Remove from: <button id="Remove1">Column 1</button><button id="Remove2">Column 2</button><button id="Remove3">Column 3</button><button id="Remove4">Column 4</button>
 <br>
 <BR>Move from column <input type="text" id="from_col"  /> to <input type="text" id="to_col"  /> <button id="moveButton">Move</button>
 <br>
@@ -108,62 +108,59 @@
 var game;
 
 function display(game) {
-console.log(game);
+    console.log(game);
 
-$( '.columnOfCards .cardLocation' ).html("");
+    $( '.columnOfCards .cardLocation' ).html("");
 
-    $.each(game.cols[0], function( key, val ) {
-        $( '#c0 .l'+key ).html(val.value + val.suit);
-    });
+        $.each(game.cols[0].cards, function( key, val ) {
+            $( '#c0 .l'+key ).html(val.value + val.suit);
+        });
 
- $.each(game.cols[1], function( key, val ) {
-        $( '#c1 .l'+key ).html(val.value + val.suit);
-    });
+    $.each(game.cols[1].cards, function( key, val ) {
+            $( '#c1 .l'+key ).html(val.value + val.suit);
+        });
 
- $.each(game.cols[2], function( key, val ) {
-        $( '#c2 .l'+key ).html(val.value + val.suit);
-    });
+     $.each(game.cols[2].cards, function( key, val ) {
+            $( '#c2 .l'+key ).html(val.value + val.suit);
+        });
 
- $.each(game.cols[3], function( key, val ) {
-        $( '#c3 .l'+key ).html(val.value + val.suit);
-    });
-
-
-
+     $.each(game.cols[3].cards, function( key, val ) {
+            $( '#c3 .l'+key ).html(val.value + val.suit);
+        });
 }
 
 // Calls ApplicationController.gameGet()
 $.getJSON("http://localhost:8080/game", function( data ) {
-display(data);
-game = data;
+    display(data);
+    game = data;
 });
 
 
 $("#deckImage").click(function(){
-$.ajax({
-  type: "POST",
-  url: "/dealGame",
-  data: JSON.stringify(game),
-  success: function(data, status){console.log("Data: " + data + "\nStatus: " + status);
-        game = data;
-        display(data);},
-  contentType:"application/json; charset=utf-8",
-  dataType:"json",
-});
+    $.ajax({
+      type: "POST",
+      url: "/dealGame",
+      data: JSON.stringify(game),
+      success: function(data, status){console.log("Data: " + data + "\nStatus: " + status);
+            game = data;
+            display(data);},
+      contentType:"application/json; charset=utf-8",
+      dataType:"json",
+    });
 });
 
 
 function removeCard(colNumber){
-$.ajax({
-type: "POST",
-url: "/removeCard/"+colNumber,
-data: JSON.stringify(game),
-success: function(data, status){console.log("Data: " + data + "\nStatus: " + status);
-game = data;
-display(data);},
-contentType:"application/json; charset=utf-8",
-dataType:"json",
-});
+    $.ajax({
+        type: "POST",
+        url: "/removeCard/"+colNumber,
+        data: JSON.stringify(game),
+        success: function(data, status){console.log("Data: " + data + "\nStatus: " + status);
+        game = data;
+        display(data);},
+        contentType:"application/json; charset=utf-8",
+        dataType:"json",
+    });
 
 }
 
@@ -183,18 +180,18 @@ $("#Remove4").click(function(){
 
 
 $("#moveButton").click(function(){
-var colFrom = $("#from_col").val();
-var colTo = $("#to_col").val();
-$.ajax({
-  type: "POST",
-  url: "/moveCard/"+colFrom+"/"+colTo,
-  data: JSON.stringify(game),
-  success: function(data, status){console.log("Data: " + data + "\nStatus: " + status);
-        game = data;
-        display(data);},
-  contentType:"application/json; charset=utf-8",
-  dataType:"json",
-});
+    var colFrom = $("#from_col").val() - 1;
+    var colTo = $("#to_col").val() - 1;
+    $.ajax({
+        type: "POST",
+        url: "/moveCard/"+colFrom+"/"+colTo,
+        data: JSON.stringify(game),
+        success: function(data, status){console.log("Data: " + data + "\nStatus: " + status);
+            game = data;
+            display(data);},
+        contentType:"application/json; charset=utf-8",
+        dataType:"json",
+    });
 });
 
 
