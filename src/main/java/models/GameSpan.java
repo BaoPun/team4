@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class GameSpan {
     public java.util.List<Column> cols = new ArrayList<>();
-    //public RegDeck deck = new RegDeck();
+
     public SpanDeck deck = new SpanDeck();
 
     public GameSpan(){
@@ -84,7 +84,7 @@ public class GameSpan {
 
     //Adding a clear columns function to work with toggling between the decks
     public void clearColumns(){
-        deck = new SpanDeck();
+        deck = new SpanDeck(); // initalization is different.
         for(int i = 0; i < 4; i++)
         {
             while(columnHasCards(i))
