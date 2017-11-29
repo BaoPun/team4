@@ -16,7 +16,8 @@
 
 package controllers;
 
-import models.Game;
+import models.GameReg;
+import models.GameSpan;
 import ninja.Context;
 import ninja.Result;
 import ninja.Results;
@@ -31,29 +32,49 @@ public class ApplicationController {
         return Results.html().template("views/AcesUp/AcesUp.flt.html");
     }
     
-    public Result gameGet(){
-        Game g = new Game();
-        //g.buildDeck();
-        //g.shuffle();
+    public Result gameGetReg(){
+        GameReg g = new GameReg();
         g.dealFour();
 
         return Results.json().render(g);
     }
 
-    public Result dealPost(Context context, Game g) {
+    public Result gameGetSpan(){
+        GameSpan g = new GameSpan();
+        g.dealFour();
+
+        return Results.json().render(g);
+    }
+
+    public Result dealPost(Context context, GameReg g) {
         if(context.getRequestPath().contains("deal")){
             g.dealFour();
         }
         return Results.json().render(g);
     }
 
-    public Result removeCard(Context context, @PathParam("column") int colNumber, Game g){
+    public Result removeCard(Context context, @PathParam("column") int colNumber, GameReg g){
         g.remove(colNumber);
         return Results.json().render(g);
     }
 
-    public Result moveCard(Context context, @PathParam("columnFrom") int colFrom, @PathParam("columnTo") int colTo, Game g){
+    public Result moveCard(Context context, @PathParam("columnFrom") int colFrom, @PathParam("columnTo") int colTo, GameReg g){
         g.move(colFrom,colTo);
+        return Results.json().render(g);
+    }
+
+    /*Bottom 2 functions clear the column data from the game, so that refreshing the page is not needed after swapping decks*/
+    public Result clearRegColumns(Context context, GameReg g){
+        if(context.getRequestPath().contains("clear")){
+            g.clearColumns();
+        }
+        return Results.json().render(g);
+    }
+
+    public Result clearSpanColumns(Context context, GameSpan g){
+        if(context.getRequestPath().contains("clear")){
+            g.clearColumns();
+        }
         return Results.json().render(g);
     }
 

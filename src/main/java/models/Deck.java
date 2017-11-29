@@ -1,6 +1,5 @@
 package models;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 public class Deck {
@@ -9,14 +8,7 @@ public class Deck {
 
     public int size;
 
-    public Deck(){
-        d = new ArrayList<>();
-        size = 0;
-        makeDeck();
-        shuffleDeck();
-    }
-
-    public void makeDeck(){
+    /*public void makeDeck(){
         for(int i = 2; i < 15; i++){
             this.d.add(new Card(i,Suit.Clubs));
             this.d.add(new Card(i,Suit.Hearts));
@@ -24,13 +16,13 @@ public class Deck {
             this.d.add(new Card(i,Suit.Spades));
         }
         this.size = d.size();
-    }
+    }*/
 
     public void shuffleDeck(){
         Random randomGen = new Random();                        //Initialize random number generator object
         for(int i=0; i<200; i++){                               //Perform 200 times just to ensure the deck is shuffled
-            int randomInt = randomGen.nextInt(52);      //Get the indexes of two random cards
-            int randomInt2 = randomGen.nextInt(52);
+            int randomInt = randomGen.nextInt(this.size);      //Get the indexes of two random cards
+            int randomInt2 = randomGen.nextInt(this.size);
             Card tempCard = this.d.get(randomInt);                //Store the value of both cards
             Card tempCard2 = this.d.get(randomInt2);
             this.d.remove(randomInt);                             //Remove the card at the first index and copy the second card over

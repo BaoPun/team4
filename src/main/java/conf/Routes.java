@@ -29,13 +29,17 @@ public class Routes implements ApplicationRoutes {
 
     @Override
     public void init(Router router) {  
-        
-        router.GET().route("/").with(ApplicationController.class, "index");
 
-        router.GET().route("/game").with(ApplicationController.class, "gameGet");
+        /*New routers were added from the application controller so that supporting functions could be added*/
+
+        router.GET().route("/").with(ApplicationController.class, "index");
+        router.GET().route("/gameReg").with(ApplicationController.class, "gameGetReg");
+        router.GET().route("/gameSpan").with(ApplicationController.class, "gameGetSpan");
         router.POST().route("/dealGame").with(ApplicationController.class, "dealPost");
         router.POST().route("/moveCard/{columnFrom}/{columnTo}").with(ApplicationController.class, "moveCard");
         router.POST().route("/removeCard/{column}").with(ApplicationController.class, "removeCard");
+        router.POST().route("/clearReg").with(ApplicationController.class, "clearRegColumns");
+        router.POST().route("/clearSpan").with(ApplicationController.class, "clearSpanColumns");
 
         ///////////////////////////////////////////////////////////////////////
         // Assets (pictures / javascript)

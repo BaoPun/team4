@@ -101,11 +101,12 @@
 </div>
 
 <a href="https://en.wikipedia.org/wiki/Aces_Up">RULES FOUND HERE</a>
-
+<button id="reg_game"> CLICK TO SWITCH DECK </button>
 
 <script>
 
 var game;
+var switchValue = -1; /*Start out the game with -1, will switch between 1 and 0 when the game starts*/
 
 function display(game) {
     console.log(game);
@@ -128,13 +129,29 @@ function display(game) {
             $( '#c3 .l'+key ).html(val.value + val.suit);
         });
 }
-
-// Calls ApplicationController.gameGet()
-$.getJSON("http://localhost:8080/game", function( data ) {
-    display(data);
-    game = data;
-});
-
+/*If game was just loaded, ask if they want to play with the regular deck. Dependent on response now*/
+if(switchValue == -1)
+{
+    var deckRespond = prompt("Do you want to play with the regular deck? (YES to play with this)").toUpperCase();
+    if(deckRespond == "YES")
+    {
+        switchValue = 1;
+        // Calls ApplicationController.gameGet() with regular deck
+        $.getJSON("http://localhost:8080/gameReg", function( data ) {
+            display(data);
+            game = data;
+        });
+    }
+    else
+    {
+        switchValue = 0;
+         // Calls ApplicationController.gameGet() with spanish deck
+        $.getJSON("http://localhost:8080/gameSpan", function( data ) {
+            display(data);
+            game = data;
+        });
+    }
+}
 
 $("#deckImage").click(function(){
     $.ajax({
@@ -194,6 +211,49 @@ $("#moveButton").click(function(){
     });
 });
 
+/*After clicking on this, clear the column data, make a new deck, and play with it now*/
+$("#reg_game").click(function(){
+  if(switchValue == 1)
+  {
+        switchValue = 0;
+        alert("Playing with the Spanish Deck now");
+        /*Clear the column data made by the regular deck*/
+        $.ajax({
+           type: "POST",
+           url: "/clearReg",
+           data: JSON.stringify(game),
+           success: function(data, status){console.log("Data: " + data + "\nStatus: " + status);
+           game = data;
+           },
+           contentType:"application/json; charset=utf-8",
+           dataType:"json",
+        });
+        $.getJSON("http://localhost:8080/gameSpan", function( data ) {
+            display(data);
+            game = data;
+        });
+  }
+  else
+  {
+        switchValue = 1;
+        alert("Playing with the Regular Deck now");
+        /*Clear the column data made by the Spanish deck*/
+        $.ajax({
+           type: "POST",
+           url: "/clearSpan",
+           data: JSON.stringify(game),
+           success: function(data, status){console.log("Data: " + data + "\nStatus: " + status);
+           game = data;
+           },
+           contentType:"application/json; charset=utf-8",
+           dataType:"json",
+        });
+        $.getJSON("http://localhost:8080/gameReg", function( data ) {
+            display(data);
+            game = data;
+        });
+  }
+});
 
 </script>
 
