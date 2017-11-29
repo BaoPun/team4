@@ -1,9 +1,7 @@
 tr{
     /*width: 500px;*/
     height: 25px;
-
 }
-
 
 h1
 {
@@ -80,6 +78,19 @@ td{
     float: right;
     background-color: beige;
     box-shadow: 5px 5px 3px rgba(0,0,0,0.2);
+}
+
+#reg_game{
+    position: relative;
+    left: -650px;
+    top: -350px;
+    background-color: dodgerblue;
+    border-radius: 6%;
+    border-style: solid;
+    border-width: 5px;
+    width: 100px;
+    height: 150px;
+    cursor: pointer;
 }
 
 #innerDeckImage{
