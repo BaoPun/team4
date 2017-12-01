@@ -58,7 +58,3 @@ public class testGame {
         g.remove(2);
         assertEquals(0,g.columns.get(2).cards.size());
     }
-
-
-
-}
