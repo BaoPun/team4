@@ -92,21 +92,25 @@
 </table>
 
 
-<BR>Remove from: <button id="Remove1">Column 1</button><button id="Remove2">Column 2</button><button id="Remove3">Column 3</button><button id="Remove4">Column 4</button>
+<BR><span class="bottomText">Remove from: </span><button id="Remove1">Column 1</button> <button id="Remove2">Column 2</button> <button id="Remove3">Column 3</button> <button id="Remove4">Column 4</button>
 <br>
-<BR>Move from column <input type="text" id="from_col"  /> to <input type="text" id="to_col"  /> <button id="moveButton">Move</button>
+<BR><span class="bottomText">Move from column </span><input type="text" id="from_col"/><span class="bottomText"> to </span><input type="text" id="to_col"/> <button id="moveButton">Move</button>
 <br>
 <div id="deckImage">
-    <div id="innerDeckImage"><p class = "deckTextImage">DRAW CARDS</p></div>
+    <div id="innerDeckImage"><p id="deckTextImage">DRAW CARDS</p></div>
 </div>
 
 <a href="https://en.wikipedia.org/wiki/Aces_Up">RULES FOUND HERE</a>
-<button id="switchGame"> CLICK TO SWITCH DECK </button>
+<!--<button id="switchGame"> CLICK TO SWITCH DECK </button>-->
+
+<div id="switchImage">
+    <div id="innerSwitchImage"><p id="switchTextImage">CLICK TO SWITCH DECK</p></div>
+</div>
 
 <script>
 
 var game;
-var switchValue = -1; /*Start out the game with -1, will switch between 1 and 0 when the game starts*/
+var switchValue = -1; /*Start out the game with -1, will switch between 1 (regular deck) and 0 (spanish deck) when the game starts*/
 
 function display(game) {
     console.log(game);
@@ -140,6 +144,14 @@ if(switchValue == -1)
     deckRespond = deckRespond.toUpperCase();
     if(deckRespond == "YES")
     {
+        $("#switchImage").css({"background-color": "yellow"});
+        $("#innerSwitchImage").css({"background-color": "dodgerblue", "border-color": "blue"});
+        $("#switchTextImage").text("SWITCH TO SPANISH DECK");
+
+        $("#deckImage").css({"background-color": "beige"});
+        $("#innerDeckImage").css({"background-color": "red", "border-color": "firebrick"});
+        $("#deckTextImage").text("DRAW REGULAR CARDS");
+
         switchValue = 1;
         // Calls ApplicationController.gameGet() with regular deck
         $.getJSON("http://localhost:8080/gameReg", function( data ) {
@@ -149,6 +161,14 @@ if(switchValue == -1)
     }
     else
     {
+        $("#switchImage").css({"background-color": "beige"});
+        $("#innerSwitchImage").css({"background-color": "red", "border-color": "firebrick"});
+        $("#switchTextImage").text("SWITCH TO REGULAR DECK");
+
+        $("#deckImage").css({"background-color": "yellow"});
+        $("#innerDeckImage").css({"background-color": "dodgerblue", "border-color": "blue"});
+        $("#deckTextImage").text("DRAW SPANISH CARDS");
+
         switchValue = 0;
          // Calls ApplicationController.gameGet() with spanish deck
         $.getJSON("http://localhost:8080/gameSpan", function( data ) {
@@ -264,11 +284,23 @@ $("#moveButton").click(function(){
 });
 
 /*After clicking on this, clear the column data, make a new deck, and play with it now*/
-$("#switchGame").click(function(){
+/*$("#switchGame").click(function(){*/
+$("#switchImage").click(function(){
   if(switchValue == 1)
   {
         switchValue = 0;
         alert("Playing with the Spanish Deck now");
+
+        /*Swap colors and text with other deck*/
+        $("#switchImage").css({"background-color": "beige"});
+        $("#innerSwitchImage").css({"background-color": "red", "border-color": "firebrick"});
+        $("#switchTextImage").text("SWITCH TO REGULAR DECK");
+
+        $("#deckImage").css({"background-color": "yellow"});
+        $("#innerDeckImage").css({"background-color": "dodgerblue", "border-color": "blue"});
+        $("#deckTextImage").text("DRAW SPANISH CARDS");
+
+
         /*Clear the column data made by the regular deck*/
         $.ajax({
            type: "POST",
@@ -289,6 +321,16 @@ $("#switchGame").click(function(){
   {
         switchValue = 1;
         alert("Playing with the Regular Deck now");
+
+        /*Swap colors and text with other deck*/
+        $("#switchImage").css({"background-color": "yellow"});
+        $("#innerSwitchImage").css({"background-color": "dodgerblue", "border-color": "blue"});
+        $("#switchTextImage").text("SWITCH TO SPANISH DECK");
+
+        $("#deckImage").css({"background-color": "beige"});
+        $("#innerDeckImage").css({"background-color": "red", "border-color": "firebrick"});
+        $("#deckTextImage").text("DRAW REGULAR CARDS");
+
         /*Clear the column data made by the Spanish deck*/
         $.ajax({
            type: "POST",

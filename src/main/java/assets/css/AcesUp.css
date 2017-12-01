@@ -56,10 +56,12 @@ td{
     background-color:#F0F0F0;
 }
 
-.cardContainer {
+.cardContainer{
     margin-bottom: 15px;
     border: 1px solid black;
 }
+
+
 
 #deckImage:hover{
     cursor: pointer;
@@ -80,20 +82,6 @@ td{
     box-shadow: 5px 5px 3px rgba(0,0,0,0.2);
 }
 
-#switchGame{
-    font-size: 15px;
-    width: 100px;
-    height: 160px;
-    float: left;
-    position: relative;
-    top: -360px;
-    background-color: dodgerblue;
-    border-width: 7px;
-    border-radius: 8%;
-    border-color: yellow;
-    box-shadow: 5px 5px 3px rgba(0,0,0,0.2);
-}
-
 #innerDeckImage{
     width: 78px;
     height: 138px;
@@ -107,10 +95,67 @@ td{
     background-color: red;
 }
 
-.deckTextImage
-{
+#deckTextImage{
     position: relative;
-    top: 20%;
+    top: 10%;
+}
+
+
+
+#switchImage:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+#switchImage {
+    width: 100px;
+    height: 160px;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 8%;
+    position: relative;
+    top: -360px;
+    left: 10px;
+    float: left;
+    background-color: yellow;
+    box-shadow: 5px 5px 3px rgba(0,0,0,0.2);
+}
+
+#innerSwitchImage{
+    width: 78px;
+    height: 138px;
+    position: relative;
+    right: -8px;
+    top: 9px;
+    border-radius: 8%;
+    border-style: solid;
+    border-width: 3px;
+    border-color: blue;
+    background-color: dodgerblue;
+}
+
+#switchTextImage{
+    position: relative;
+    top: 2%;
+}
+
+#switchGame{
+    font-size: 15px;
+    width: 100px;
+    height: 160px;
+    float: left;
+    position: relative;
+    /*top: -360px;
+    left: 10px;*/
+    background-color: dodgerblue;
+    border-width: 7px;
+    border-radius: 8%;
+    border-color: yellow;
+    box-shadow: 5px 5px 3px rgba(0,0,0,0.2);
+}
+
+.bottomText{
+    color: yellow;
 }
 
 a:link{
