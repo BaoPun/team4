@@ -17,7 +17,7 @@ public class testCard {
         assertEquals("5Clubs",c.toString());
     }
 
-    @Test
+    /*@Test     //Function not in Card class
     public void testMoveCard(){
         Game g = new Game();
         g.customDeal(0,3,6,9);
@@ -27,6 +27,7 @@ public class testCard {
         assertEquals(1,g.columns.get(2).cards.size());
         assertEquals(0,g.columns.get(0).cards.size());
     }
+    */
 
 
 }
