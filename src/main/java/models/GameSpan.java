@@ -38,7 +38,7 @@ public class GameSpan {
         for (int i = 0; i < 4; i++) {
             if (i != columnNumber && columnHasCards(i)) {
                 Card temp = getTopCard(i);
-                if ((toRemove.getSuit() == temp.getSuit()) && (toRemove.getValue() < temp.getValue() || temp.getValue() == 1)) {
+                if ((toRemove.getSuit() == temp.getSuit()) && ((toRemove.getValue() < temp.getValue() && toRemove.getValue() != 1) || temp.getValue() == 1)) {
                     removeCardFromCol(columnNumber);
                     return;
                 }
@@ -91,5 +91,14 @@ public class GameSpan {
                 cols.get(i).cards.remove(cols.get(i).cards.size() - 1);
 
         }
+    }
+
+    public void customDeal(){
+        for(int i = 0; i < 3; i++){
+            Card c = new Card(i+1, Suit.Copas);
+            addCardToCol(i, c);
+        }
+        Card c = new Card(0, Suit.Comodine);
+        addCardToCol(3, c);
     }
 }
