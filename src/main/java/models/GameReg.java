@@ -85,6 +85,7 @@ public class GameReg {
         }
     }
 
+    //Used for Testing Unit
     public void customDeal(int flag) {
         if (flag == 0) {
             for (int i = 0; i < 4; i++) {
