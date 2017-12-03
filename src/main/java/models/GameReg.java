@@ -43,14 +43,6 @@ public class GameReg {
                     return;
                 }
             }
-        }for(int i = 0; i < 4; i++) {
-            if(i != columnNumber && columnHasCards(i)){
-                Card temp = getTopCard(i);
-                if(temp.getValue() == 0){
-                    removeCardFromCol(columnNumber);
-                    removeCardFromCol(i);
-                }
-            }
         }
     }
 

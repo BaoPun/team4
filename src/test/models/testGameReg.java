@@ -1,12 +1,10 @@
 package models;
 
-import models.GameReg;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 
 public class testGameReg {
 
@@ -44,26 +42,26 @@ public class testGameReg {
     @Test
     public void testRemove(){
         g.remove(0);
-        assertEquals(0, g.cols.get(0).getSize());
+        assertEquals(0, g.cols.get(0).cards.size());
         g.customDeal(0);
         g.remove(3);
         assertEquals("14Clubs", g.cols.get(3).cards.get(0).toString());
         g.remove(2);
-        assertEquals(0, g.cols.get(2).getSize());
+        assertEquals(0, g.cols.get(2).cards.size());
         g.remove(2);
-        assertEquals(0, g.cols.get(2).getSize());
+        assertEquals(0, g.cols.get(2).cards.size());
     }
 
     @Test
     public void testClear(){
         g.clearColumns();
         for(int i = 0; i < 4; i++){
-            assertEquals(0, g.cols.get(i).getSize());
+            assertEquals(0, g.cols.get(i).cards.size());
         }
         g.dealFour();
         g.clearColumns();
         for(int i = 0; i < 4; i++){
-            assertEquals(0, g.cols.get(i).getSize());
+            assertEquals(0, g.cols.get(i).cards.size());
         }
     }
 }
