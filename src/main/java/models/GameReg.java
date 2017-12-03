@@ -93,5 +93,12 @@ public class GameReg {
         }
     }
 
-
+    public void customDeal(int flag) {
+        if (flag == 0) {
+            for (int i = 0; i < 4; i++) {
+                Card temp = new Card(i + 11, Suit.Clubs);
+                addCardToCol(i, temp);
+            }
+        }
+    }
 }

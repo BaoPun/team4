@@ -13,4 +13,8 @@ public class Column {
     public Column(int id) {
         this.id = id;
     }
+
+    public int getSize(){
+        return this.cards.size();
+    }
 }
