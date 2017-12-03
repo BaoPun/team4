@@ -10,6 +10,12 @@ public class testCard {
         Card c = new Card(5,Suit.Clubs);
         assertEquals(Suit.Clubs,c.getSuit());
     }
+    
+    @Test
+    public void testGetVal(){
+        Card c = new Card(10, Suit.Clubs);
+        assertEquals(10, c.getValue());
+    }
 
     @Test
     public void testToString(){
@@ -28,6 +34,5 @@ public class testCard {
         assertEquals(0,g.columns.get(0).cards.size());
     }
     */
-
 
 }
