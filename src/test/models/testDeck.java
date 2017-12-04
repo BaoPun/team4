@@ -1,65 +1,47 @@
 package models;
 
 import org.junit.Test;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
 
-public Class testDeck{
+
+public class testDeck{
+
         @Test
-        public void testRegDeck)()
+        public void testRegDeck()
         {
-            RegDeck deck = new RegDeck();
-            assertEquals(52, deck.getSize());
-            deck.shuffleDeck();
-            assertEquals(52, deck.getSize()); //make sure there are STILL 52 cards in deck after shuffling
-            RegDeck test = new RegDeck(); //to fully compare that shuffle is not working, make a test deck
-            assertEquals(52, test.getSize());
-            int val = 0;
-            int deckSize = deck.getSize();
-            for(int i = deck.getSize() - 1; i >= 0; i--) //compare each deck; if shuffle works, then val cannot be 52.
-            {
-                Card popDeck = deck.popCard(i);
-                Card popTest = test.popCard(i);
-                if(popDeck.getValue() == popTest.getValue())
-                    val++;
-            }
-            assertThat(val, not(equalTo(deckSize)));
+                GameReg g1 = new GameReg();
+                g1.deck.shuffleDeck();
+                GameReg g2 = new GameReg();
+                g2.deck.shuffleDeck();
+                // g1 and g2 could shuffle to the same order, but that chance is approximately 1 in 8*10^67 shuffles
+                assertFalse(Arrays.equals(g1.deck.d.toArray(), g2.deck.d.toArray()));
         }
 
         @Test
         public void testPopCard()
         {
             RegDeck deck = new RegDeck();
+            Card c = deck.d.get(51);
             Card get = deck.popCard(51);
-            assertEquals(14, get.getValue());
+            assertEquals(c, get);
 
             SpanDeck deck2 = new SpanDeck();
-            Card get2 = deck2.popCard(49);
-            assertEquals(0, get2.getValue());
+            c = deck2.d.get(49);
+            get = deck2.popCard(49);
+            assertEquals(c, get);
         }
 
         @Test
         public void testSpanDeck()
         {
-            SpanDeck deck = new SpanDeck();
-            assertEquals(52, deck.getSize());
-            deck.shuffleDeck();
-            assertEquals(52, deck.getSize()); //make sure there are STILL 52 cards in deck after shuffling
-            SpanDeck test = new SpanDeck(); //to fully compare that shuffle is not working, make a test deck
-            assertEquals(52, test.getSize());
-            int val = 0;
-            int deckSize = deck.getSize();
-            for(int i = deck.getSize() - 1; i >= 0; i--) //compare each deck; if shuffle works, then val cannot be 50.
-            {
-                Card popDeck = deck.popCard(i);
-                Card popTest = test.popCard(i);
-                if(popDeck.getValue() == popTest.getValue())
-                    val++;
-            }
-            assertThat(val, not(equalTo(deckSize)));
+                GameSpan g1 = new GameSpan();
+                g1.deck.shuffleDeck();
+                GameSpan g2 = new GameSpan();
+                g2.deck.shuffleDeck();
+                // g1 and g2 could shuffle to the same order, but that chance is approximately 1 in 8*10^67 shuffles
+                assertFalse(Arrays.equals(g1.deck.d.toArray(), g2.deck.d.toArray()));
         }
 
 
